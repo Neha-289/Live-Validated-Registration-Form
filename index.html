@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Registration Form</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+			box-sizing:border-box;
+		}
+		body{
+			background:linear-gradient(to left,rgba(116,235,213,0.6),rgba(159,172,230,0));
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			min-height:100vh;
+			font-family:'Mulish';
+			width:100vw;
+		}
+		.container{
+			background-color:#fff;
+			border-radius:10px;
+			overflow:hidden;
+			max-width:100%;
+			width:calc(100vw-65vw);
+		}
+		.header{
+			background:linear-gradient(to left,#74ebd5,#9face6);
+			padding:1rem 0;
+		}
+		.header h2{
+			color:#222;
+			font-family:'Montserrat';
+			font-size:1.5rem;
+			text-transform:uppercase;
+			text-align:center;
+		}
+		.form{
+			padding:1.5rem;
+		}
+		.form-control{
+			margin-bottom:0.75rem;
+			position:relative;
+		}
+		.form-control label{
+			margin-bottom:0.5rem;
+		}
+		.form-control input{
+			width:100%;
+			border:2px solid #f0f0f0;
+			border-radius:5px;
+			font-size:14px;
+			padding:0.7rem 0.7rem;
+		}
+		.form-control input:focus{
+			outline:0;
+			border-color:#777;
+		}
+		.form-control.success input{
+			border-color:#2ecc71;
+		}
+		.form-control.error input{
+			border-color:#e74c3c;
+		}
+		.form-control i{
+			position:absolute;
+			right:12px;
+			top:38px;
+			visibility:hidden;
+		}
+		.form-control small{
+			color:#e74c3c;
+			visibility:hidden;
+		}
+		.form-control.error small{
+			visibility:visible;
+		}
+		.form-control.success i.fa-check-circle{
+			color:#2ecc71;
+			visibility:visible;
+		}
+		.form-control.error i.fa-exclamation-circle{
+			color:#e74c3c;
+			visibility:visible;
+		}
+		.form .btn{
+			background:linear-gradient(to left,#74ebd5,#9face6);
+			border-radius:6px;
+			border:none;
+			outline:none;
+			color:#fff;
+			display:block;
+			font-family:'Montserrat';
+			font-size:1 rem;
+			padding:0.9rem 0;
+			margin-top:1rem;
+			width:100%;
+			font-weight:bold;
+			text-transform:uppercase;
+			transition:all 1s ease;
+		}
+		.form .btn:hover{
+			background:linear-gradient(to right,#74ebd5,#9face6);
+		}
+		@media(max-width:998px){
+			.container{
+				width:calc(100vw-35vw);
+				max-width:100%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h2>Registration Form</h2>
+		</div>
+		<form class="form" id="form" onsubmit="return SuccessMsg(nameVal)">
+			<div class="form-control">
+				<label>Username</label>
+				<input type="text" name="" id="name" placeholder="Enter Your Name" autocomplete="off">
+				<i class="fa fa-check-circle"></i>
+				<i class="fa fa-exclamation-circle"></i>
+				<small>Error Message</small>
+			</div>
+			<div class="form-control">
+				<label>Phone Number</label>
+				<input type="number" name="" id="phone" placeholder="Enter Your Phone Number" autocomplete="off">
+				<i class="fa fa-check-circle"></i>
+				<i class="fa fa-exclamation-circle"></i>
+				<small>Error Message</small>
+			</div>
+			<div class="form-control">
+				<label>Email</label>
+				<input type="email" name="" id="email" placeholder="Enter Your Email" autocomplete="off">
+				<i class="fa fa-check-circle"></i>
+				<i class="fa fa-exclamation-circle"></i>
+				<small>Error Message</small>
+			</div>
+			<div class="form-control">
+				<label>Password</label>
+				<input type="password" name="" id="password" placeholder="Enter Your Password" autocomplete="off">
+				<i class="fa fa-check-circle"></i>
+				<i class="fa fa-exclamation-circle"></i>
+				<small>Error Message</small>
+			</div>
+			<div class="form-control">
+				<label>Confirm Password</label>
+				<input type="password" name="" id="cpassword" placeholder="Enter Your Password Again" autocomplete="off">
+				<i class="fa fa-check-circle"></i>
+				<i class="fa fa-exclamation-circle"></i>
+				<small>Error Message</small>
+			</div>
+			<input type="submit" name="" value="Submit" class="btn" id="btn">
+		</form>
+	</div>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script>
+		const form=document.getElementById("form");
+		const name=document.getElementById("name");
+		const phone=document.getElementById("phone");
+		const email=document.getElementById("email");
+		const password=document.getElementById("password");
+		const cpassword=document.getElementById("cpassword");
+		
+		form.addEventListener('submit',(event)=>{
+			event.preventDefault();
+		})
+		
+		const sendData=(nameVal,sRate,count)=>{
+			if (sRate===count){
+				x=confirm("Accept our terms and conditions");
+				if(x==true){
+					swal("Welcome ! "+nameVal, " Your Registration Form Have Been  Successfully Submitted","success");
+				}
+				else{
+					alert("Your form is in pending\n Accept our terms and conditions for successfully submitting your form");
+				}
+			}
+		}
+		
+		const SuccessMsg = (nameVal) => {
+			let formcon=document.getElementsByClassName("form-control");
+			
+			var count=formcon.length-1;
+			for(var i=0;i<formcon.length;i++){
+				if (formcon[i].className==="form-control success"){
+					var sRate=0+i;
+					sendData(nameVal,sRate,count);
+				}else{
+					return false;
+				}
+			}
+		}
+		
+		const isEmail=(emailVal)=>{
+			var atsymbol=emailVal.indexOf("@");
+			if (atsymbol<1) return false;
+			var dot=emailVal.lastIndexOf(".");
+			if(dot<=atsymbol+3) return false;
+			if(dot===emailVal.length-1) return false;
+			return true;
+		}
+		
+		const validate=()=>{
+			nameVal=name.value.trim();
+			const phoneVal=phone.value.trim();
+			const emailVal=email.value.trim();
+			const passwordVal=password.value.trim();
+			const cpasswordVal=cpassword.value.trim();
+			
+			if(nameVal===""){
+				setErrormsg(name,"Name cannot be blank");
+			}else if(nameVal.length<=2){
+				setErrormsg(name,"Name should be  min of 3 char");
+			}else{
+				setsuccessmsg(name);
+			}
+			
+			if(emailVal===""){
+				setErrormsg(email,"Email cannot be blank");
+			}else if(!isEmail(emailVal)){
+				setErrormsg(email,"Not a valid Email");
+			}else{
+				setsuccessmsg(email);
+			}
+			
+			if(phoneVal===""){
+				setErrormsg(phone,"phone cannot be blank");
+			}else if(phoneVal.length!=10){
+				setErrormsg(phone,"Not a valid phone num");
+			}else{
+				setsuccessmsg(phone);
+			}
+			
+			if(passwordVal===""){
+				setErrormsg(password,"password cannot be blank");
+			}else if(passwordVal.length<=5){
+				setErrormsg(password,"Minimum 6 char is required");
+			}else{
+				setsuccessmsg(password);
+			}
+			
+			if(cpasswordVal===""){
+				setErrormsg(cpassword,"Confirm your password");
+			}else if(passwordVal!=cpasswordVal){
+				setErrormsg(cpassword,"Password shouldn't match");
+			}else{
+				setsuccessmsg(cpassword);
+			}
+			// SuccessMsg(nameVal);
+		}
+		
+		
+			function setErrormsg(input,errormsg){
+				const formControl=input.parentElement;
+				const small=formControl.querySelector("small");
+				formControl.className="form-control error";
+				small.innerText=errormsg;
+			}
+			
+			function setsuccessmsg(input){
+				const formControl=input.parentElement;
+				formControl.className="form-control success";
+			}
+		
+		//validate while typing
+		name.addEventListener("input",validate);
+		phone.addEventListener("input",validate);
+		email.addEventListener("input",validate);
+		password.addEventListener("input",validate);
+		cpassword.addEventListener("input",validate);
+	</script>
+</body>
+</html>
